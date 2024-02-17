@@ -1,0 +1,13 @@
+{
+    "[python]": 
+    {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.formatOnSave": true,
+    },
+    "ruff.lint.args": ["--config=./pyproject.toml"],
+    "ruff.format.args": ["--config=./pyproject.toml"],
+    "ruff.ignoreStandardLibrary": true,
+}
