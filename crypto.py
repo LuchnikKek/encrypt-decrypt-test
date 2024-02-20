@@ -28,7 +28,7 @@ def generate_key_pair() -> tuple[RsaKey, RsaKey]:
     return key, key.publickey()
 
 
-def encrypt_session_key(session_key: bytes, public_key: RsaKey) -> int:
+def encrypt_session_key(session_key: bytes, public_key: RsaKey) -> bytes:
     cipher_rsa = PKCS1_OAEP.new(public_key)
     enc_session_key = cipher_rsa.encrypt(session_key)
 
@@ -86,7 +86,7 @@ def decrypt(encrypted: EncryptedMessage, session_key: bytes) -> str:
     return data.decode()
 
 
-if __name__ == "__main__":
+def main():
     raw = "message to encrypt"
     session_key = get_random_bytes(16)
     priv_key, pub_key = generate_key_pair()
@@ -97,6 +97,10 @@ if __name__ == "__main__":
     print("Зашифрованный сессионный ключ:", encrypted_session_key)  # noqa: T201
     print("Зашифрованное сообщение:", encrypted_data.message)  # noqa: T201
 
-    # Cliend side
+    # Client side
     decrypted_session_key = decrypt_session_key(encrypted_session_key, priv_key)
     print("Расшифрованное сообщение:", decrypt(encrypted_data, decrypted_session_key))  # noqa: T201
+
+
+if __name__ == "__main__":
+    main()
